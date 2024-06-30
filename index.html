@@ -9,16 +9,23 @@
 <body>
     <div class="container">
         <h1>Tabla de Productos</h1>
-        <button id="btnAgregar">Agregar Producto</button>
-        <button id="btnEliminar">Eliminar Producto</button>
+        <form id="formulario">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
+            <button type="submit">Agregar Producto</button>
+        </form>
         <table id="tabla-productos">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Acciones</th> <!-- Columna para botón de eliminar -->
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
