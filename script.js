@@ -1,4 +1,4 @@
-// Array para almacenar los productos (simulación de base de datos)
+/* Array para almacenar los productos (simulación de base de datos)
 let productos = [];
 
 // Función para agregar un producto
@@ -50,3 +50,68 @@ document.getElementById('productForm').addEventListener('submit', agregarProduct
 
 // Mostrar productos al cargar la página (simulación de cargar productos existentes)
 mostrarProductos();
+*/
+document.addEventListener('DOMContentLoaded', function() {
+    const productos = [
+        { id: 1, nombre: 'Producto 1', descripcion: 'Descripción del producto 1', precio: 100 },
+        { id: 2, nombre: 'Producto 2', descripcion: 'Descripción del producto 2', precio: 150 },
+        { id: 3, nombre: 'Producto 3', descripcion: 'Descripción del producto 3', precio: 200 }
+        // Añadir más productos según sea necesario
+    ];
+
+    const tablaProductos = document.getElementById('tabla-productos');
+    const tbody = tablaProductos.querySelector('tbody');
+
+    function mostrarProductos() {
+        // Limpiamos el tbody antes de volver a mostrar los productos
+        tbody.innerHTML = '';
+
+        productos.forEach(producto => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${producto.id}</td>
+                <td>${producto.nombre}</td>
+                <td>${producto.descripcion}</td>
+                <td>${producto.precio}</td>
+                <td><button class="btnEliminar" data-id="${producto.id}">Eliminar</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Evento para eliminar productos
+        const btnEliminar = document.querySelectorAll('.btnEliminar');
+        btnEliminar.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.getAttribute('data-id'));
+                eliminarProducto(id);
+            });
+        });
+    }
+
+    function agregarProducto() {
+        const nuevoId = productos.length + 1;
+        const nuevoProducto = {
+            id: nuevoId,
+            nombre: `Producto ${nuevoId}`,
+            descripcion: `Descripción del producto ${nuevoId}`,
+            precio: Math.floor(Math.random() * 1000) + 1 // Precio aleatorio entre 1 y 1000
+        };
+        productos.push(nuevoProducto);
+        mostrarProductos();
+    }
+
+    function eliminarProducto(id) {
+        const indice = productos.findIndex(producto => producto.id === id);
+        if (indice !== -1) {
+            productos.splice(indice, 1);
+            mostrarProductos();
+        }
+    }
+
+    // Evento para agregar productos
+    const btnAgregar = document.getElementById('btnAgregar');
+    btnAgregar.addEventListener('click', agregarProducto);
+
+    // Mostrar productos al cargar la página
+    mostrarProductos();
+});
