@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const productos = [];
+    let productos = [];
+
+    // Verificar si hay productos almacenados en localStorage
+    if (localStorage.getItem('productos')) {
+        productos = JSON.parse(localStorage.getItem('productos'));
+    }
 
     const formulario = document.getElementById('formulario');
     const tablaProductos = document.getElementById('tabla-productos');
@@ -17,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const nuevoId = productos.length + 1;
+        const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
         const nuevoProducto = {
             id: nuevoId,
             nombre: nombre,
@@ -25,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             cantidad: cantidad
         };
         productos.push(nuevoProducto);
+        guardarProductosEnLocalStorage();
         mostrarProductos();
         formulario.reset();
     });
@@ -57,8 +63,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const indice = productos.findIndex(producto => producto.id === id);
         if (indice !== -1) {
             productos.splice(indice, 1);
+            guardarProductosEnLocalStorage();
             mostrarProductos();
         }
+    }
+
+    function guardarProductosEnLocalStorage() {
+        localStorage.setItem('productos', JSON.stringify(productos));
     }
 
     // Mostrar productos al cargar la página
