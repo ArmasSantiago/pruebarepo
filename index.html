@@ -1,43 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adminisración de Productos de Bodega</title>
-  <link rel="stylesheet" href="styles.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Productos</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Administración de Productos de Bodega</h1>
-  </header>
-  
-  <main>
-    <section id="agregarProducto">
-      <h2>Agregar Producto</h2>
-      <from id="productForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="descripcion">Descripcion:</label>
-        <input type="text" id="descripcion" name="descripcion" required>
-
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" min="0" required>
-
-        <button type="submit">Agregar</button>
-      </from>
-    </section>
-
-    <section id="ListaProductos">
-      <h2>Lista de Productos</h2>
-      <ul id="productosList"></ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2024 SanDiablo</p>
-  </footer>
-
-  <script> src="script.js"</script>
+    <div class="container">
+        <h1>Tabla de Productos</h1>
+        <button id="btnAgregar">Agregar Producto</button>
+        <button id="btnEliminar">Eliminar Producto</button>
+        <table id="tabla-productos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Acciones</th> <!-- Columna para botón de eliminar -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
