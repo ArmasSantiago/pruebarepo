@@ -42,7 +42,7 @@ form label {
 form input[type="text"],
 form input[type="number"],
 form button {
-    width: 95%;
+    width: 98%;
     padding: 8px;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
