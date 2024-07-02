@@ -8,31 +8,36 @@
 </head>
 <body>
     <div class="container">
-        <h1>Lista Bodega Espejo</h1>
-        <form id="formulario">
+        <h1>Inventario Bodega</h1>
+        
+        <form id="formulario" class="formulario">
+            <input type="hidden" id="producto-id" value="">
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombre" required>
             <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="descripcion" required>
+            <input type="text" id="descripcion" required>
             <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
-            <button type="submit">Agregar Producto</button>
+            <input type="number" id="cantidad" required>
+            <button type="submit" id="btnGuardar">Guardar</button>
+            <button type="button" id="btnCancelar">Cancelar</button>
         </form>
-        <table id="tabla-productos">
+
+        <table id="tabla-productos" class="tabla">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Cantidad</th>
-                    <th>Accion</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Los productos se cargarán aquí dinámicamente -->
+                <!-- Aquí se insertarán los productos -->
             </tbody>
         </table>
     </div>
-    <script src="script.js"></script>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
