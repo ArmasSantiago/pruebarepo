@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario de Bodega</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Inventario Bodega</h1>
-        
-        <form id="formulario" class="formulario">
-            <input type="hidden" id="producto-id" value="">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" required>
-            <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" required>
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" required>
-            <button type="submit" id="btnGuardar">Guardar</button>
-            <button type="button" id="btnCancelar">Cancelar</button>
-        </form>
+  <div class="container">
+    <h1>Inventario de Bodega</h1>
+    <form id="inventoryForm">
+      <label for="item">Item:</label>
+      <input type="text" id="item" required>
+      
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" required>
+      
+      <label for="description">Descripción:</label>
+      <textarea id="description" rows="3" required></textarea>
+      
+      <label for="quantity">Cantidad:</label>
+      <input type="number" id="quantity" required>
+      
+      <div class="button-container">
+        <button type="submit" id="addButton">Añadir Producto</button>
+        <button type="button" id="cancelButton">Cancelar</button>
+      </div>
+    </form>
 
-        <table id="tabla-productos" class="tabla">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Cantidad</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí se insertarán los productos -->
-            </tbody>
-        </table>
+    <div id="inventoryList">
+      <!-- Aquí se mostrarán los productos añadidos -->
     </div>
+  </div>
 
-    <script src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
