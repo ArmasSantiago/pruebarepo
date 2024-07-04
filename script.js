@@ -1,78 +1,82 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const formulario = document.getElementById('formulario');
-    const tablaProductos = document.getElementById('tabla-productos');
-    const tbody = tablaProductos.querySelector('tbody');
-    const btnGuardar = document.getElementById('btnGuardar');
-    const btnCancelar = document.getElementById('btnCancelar');
-    let editando = false;
-    let productoIdAEditar = '';
+// Función para guardar el producto en Local Storage
+function saveProduct(item, name, description, quantity) {
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+  let product = {
+    item: item,
+    name: name,
+    description: description,
+    quantity: quantity
+  };
+  products.push(product);
+  localStorage.setItem('products', JSON.stringify(products));
+}
 
-    // Evento para mostrar el formulario de edición
-    tablaProductos.addEventListener('click', function(event) {
-        if (event.target.dataset.action === 'editar') {
-            const fila = event.target.closest('tr');
-            const id = fila.querySelector('.id').textContent;
-            const nombre = fila.querySelector('.nombre').textContent;
-            const descripcion = fila.querySelector('.descripcion').textContent;
-            const cantidad = parseInt(fila.querySelector('.cantidad').textContent, 10);
+// Función para mostrar los productos en el inventario
+function displayInventory() {
+  let inventoryList = document.getElementById('inventoryList');
+  inventoryList.innerHTML = '';
 
-            document.getElementById('producto-id').value = id;
-            document.getElementById('nombre').value = nombre;
-            document.getElementById('descripcion').value = descripcion;
-            document.getElementById('cantidad').value = cantidad;
+  let products = JSON.parse(localStorage.getItem('products')) || [];
 
-            editando = true;
-            productoIdAEditar = id;
+  products.forEach(function(product, index) {
+    let card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML = `
+      <h3>${product.name}</h3>
+      <p><strong>Item:</strong> ${product.item}</p>
+      <p><strong>Descripción:</strong> ${product.description}</p>
+      <p><strong>Cantidad:</strong> ${product.quantity}</p>
+      <button onclick="editProduct(${index})">Editar</button>
+      <button onclick="deleteProduct(${index})">Eliminar</button>
+    `;
+    inventoryList.appendChild(card);
+  });
+}
 
-            formulario.classList.remove('inactivo');
-        }
-    });
+// Función para añadir un producto al inventario
+function addProduct(event) {
+  event.preventDefault();
+  
+  let item = document.getElementById('item').value;
+  let name = document.getElementById('name').value;
+  let description = document.getElementById('description').value;
+  let quantity = document.getElementById('quantity').value;
 
-    // Evento para guardar el producto editado o nuevo
-    formulario.addEventListener('submit', function(event) {
-        event.preventDefault();
+  saveProduct(item, name, description, quantity);
+  displayInventory();
+  clearForm();
+}
 
-        const id = document.getElementById('producto-id').value;
-        const nombre = document.getElementById('nombre').value;
-        const descripcion = document.getElementById('descripcion').value;
-        const cantidad = document.getElementById('cantidad').value;
+// Función para limpiar el formulario después de añadir un producto
+function clearForm() {
+  document.getElementById('item').value = '';
+  document.getElementById('name').value = '';
+  document.getElementById('description').value = '';
+  document.getElementById('quantity').value = '';
+}
 
-        if (editando) {
-            // Modificar el producto existente
-            const filaEditar = document.querySelector(`.id[data-id="${id}"]`).closest('tr');
-            filaEditar.querySelector('.nombre').textContent = nombre;
-            filaEditar.querySelector('.descripcion').textContent = descripcion;
-            filaEditar.querySelector('.cantidad').textContent = cantidad;
+// Función para cancelar la acción de añadir un producto (limpia el formulario)
+function cancelAdd() {
+  clearForm();
+}
 
-            // Limpiar formulario y variables de edición
-            formulario.reset();
-            editando = false;
-            productoIdAEditar = '';
-        } else {
-            // Agregar nuevo producto
-            const nuevaFila = `
-                <tr>
-                    <td class="id" data-id="${id}">${id}</td>
-                    <td class="nombre">${nombre}</td>
-                    <td class="descripcion">${descripcion}</td>
-                    <td class="cantidad">${cantidad}</td>
-                    <td class="acciones">
-                        <button data-action="editar">Editar</button>
-                        <button data-action="eliminar">Eliminar</button>
-                    </td>
-                </tr>
-            `;
-            tbody.innerHTML += nuevaFila;
-        }
+// Función para editar un producto (a implementar según necesidad)
+function editProduct(index) {
+  // Aquí podrías implementar la lógica para editar un producto
+  // Por ejemplo, mostrando los datos del producto en el formulario y permitiendo modificarlos
+}
 
-        formulario.classList.add('inactivo');
-    });
+// Función para eliminar un producto del inventario
+function deleteProduct(index) {
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+  products.splice(index, 1);
+  localStorage.setItem('products', JSON.stringify(products));
+  displayInventory();
+}
 
-    // Evento para cancelar la edición
-    btnCancelar.addEventListener('click', function() {
-        formulario.reset();
-        editando = false;
-        productoIdAEditar = '';
-        formulario.classList.add('inactivo');
-    });
-});
+// Event listeners
+document.getElementById('inventoryForm').addEventListener('submit', addProduct);
+document.getElementById('cancelButton').addEventListener('click', cancelAdd);
+
+// Mostrar el inventario al cargar la página
+displayInventory();
