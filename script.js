@@ -31,7 +31,10 @@ function displayInventory() {
       <td>${product.name}</td>
       <td>${product.description}</td>
       <td>${product.quantity}</td>
-      <td><button onclick="editProduct('${product.name}', '${product.description}')">Editar</button></td>
+      <td>
+        <button onclick="editProduct('${product.name}', '${product.description}')">Editar</button>
+        <button onclick="deleteProduct('${product.name}', '${product.description}')">Eliminar</button>
+      </td>
     `;
     inventoryBody.appendChild(row);
   });
@@ -50,6 +53,16 @@ function editProduct(name, description) {
       localStorage.setItem('inventory', JSON.stringify(inventory));
       displayInventory();
     }
+  }
+}
+
+// Función para eliminar un producto del inventario
+function deleteProduct(name, description) {
+  if (confirm(`¿Estás seguro de eliminar ${name} - ${description}?`)) {
+    let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+    let updatedInventory = inventory.filter(product => !(product.name === name && product.description === description));
+    localStorage.setItem('inventory', JSON.stringify(updatedInventory));
+    displayInventory();
   }
 }
 
