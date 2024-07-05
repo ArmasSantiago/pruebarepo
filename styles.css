@@ -1,15 +1,16 @@
+/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
+  background-color: #f0f0f0;
 }
 
 .container {
-  max-width: 600px;
+  max-width: 960px;
   margin: 20px auto;
-  background-color: #fff;
   padding: 20px;
+  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -18,7 +19,21 @@ h1 {
   text-align: center;
 }
 
-form {
+/* Estilos para las secciones */
+section {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+/* Formulario de producto */
+#product-form {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -45,24 +60,56 @@ button:hover {
   background-color: #45a049;
 }
 
+/* Tabla de inventario */
 #inventory-list {
-  margin-top: 20px;
+  overflow-x: auto; /* Hace que la tabla sea scrollable horizontalmente si es necesario */
 }
 
-.product-item {
-  background-color: #f0f0f0;
-  margin-bottom: 10px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
   padding: 10px;
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Estilos para los botones de acciones */
+.action-buttons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 5px;
 }
 
-.product-item span {
-  flex: 1;
+.action-buttons button {
+  padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.product-item button {
-  margin-left: 10px;
+.action-buttons button.edit {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.action-buttons button.edit:hover {
+  background-color: #45a049;
+}
+
+.action-buttons button.delete {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+.action-buttons button.delete:hover {
+  background-color: #d32f2f;
 }
