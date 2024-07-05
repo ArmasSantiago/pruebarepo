@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #0a0a0a;
-  color: #c0c0c0;
+  background-color: #101010;
+  color: #b0b0b0;
   margin: 0;
   padding: 0;
 }
@@ -9,14 +9,14 @@ body {
 .container {
   max-width: 800px;
   margin: 20px auto;
-  background-color: #171717;
+  background-color: #303030;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
 h1, h2 {
-  color: #ffcc00;
+  color: #ff5f5f;
 }
 
 #add-product, #inventory {
@@ -35,13 +35,13 @@ input[type="text"], input[type="number"], button[type="submit"] {
   border-radius: 4px;
   font-size: 16px;
   flex: 1;
-  background-color: #0a0a0a;
-  color: #c0c0c0;
+  background-color: #101010;
+  color: #b0b0b0;
 }
 
 button[type="submit"] {
-  background-color: #ffcc00;
-  color: #0a0a0a;
+  background-color: #ff5f5f;
+  color: #101010;
   cursor: pointer;
 }
 
@@ -66,8 +66,8 @@ table th, table td {
 }
 
 table th {
-  background-color: #171717;
-  color: #ffcc00;
+  background-color: #303030;
+  color: #ff5f5f;
 }
 
 table td:last-child {
@@ -75,11 +75,11 @@ table td:last-child {
 }
 
 button.delete-btn {
-  background-color: #ff3366;
+  background-color: #ff9933;
   color: #fff;
 }
 
 button.edit-btn {
-  background-color: #66ff33;
-  color: #0a0a0a;
+  background-color: #00ff99;
+  color: #101010;
 }
