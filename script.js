@@ -18,20 +18,22 @@ function addProduct(name, description, quantity) {
   displayInventory();
 }
 
-// Función para mostrar el inventario en la página
+// Función para mostrar el inventario en forma de tabla
 function displayInventory() {
   let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
-  let inventoryList = document.getElementById('inventory-list');
-  inventoryList.innerHTML = '';
+  let inventoryBody = document.getElementById('inventory-body');
+  inventoryBody.innerHTML = '';
 
-  inventory.forEach(product => {
-    const item = document.createElement('div');
-    item.classList.add('product-item');
-    item.innerHTML = `
-      <span>${product.name} - ${product.description} (${product.quantity})</span>
-      <button onclick="editProduct('${product.name}', '${product.description}')">Editar</button>
+  inventory.forEach((product, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${product.name}</td>
+      <td>${product.description}</td>
+      <td>${product.quantity}</td>
+      <td><button onclick="editProduct('${product.name}', '${product.description}')">Editar</button></td>
     `;
-    inventoryList.appendChild(item);
+    inventoryBody.appendChild(row);
   });
 }
 
