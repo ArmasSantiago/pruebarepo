@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #02050a;
-  color: #b8c0c8;
+  background-color: #080808;
+  color: #70a9a1;
   margin: 0;
   padding: 0;
 }
@@ -9,14 +9,14 @@ body {
 .container {
   max-width: 800px;
   margin: 20px auto;
-  background-color: #111b2b;
+  background-color: #101010;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
 h1, h2 {
-  color: #7fdbca;
+  color: #39ff14;
 }
 
 #add-product, #inventory {
@@ -31,17 +31,17 @@ form {
 input[type="text"], input[type="number"], button[type="submit"] {
   padding: 10px;
   margin: 5px;
-  border: 1px solid #7fdbca;
+  border: 1px solid #39ff14;
   border-radius: 4px;
   font-size: 16px;
   flex: 1;
-  background-color: #02050a;
-  color: #b8c0c8;
+  background-color: #080808;
+  color: #70a9a1;
 }
 
 button[type="submit"] {
-  background-color: #7fdbca;
-  color: #02050a;
+  background-color: #39ff14;
+  color: #080808;
   cursor: pointer;
 }
 
@@ -60,14 +60,14 @@ table {
 }
 
 table th, table td {
-  border: 1px solid #7fdbca;
+  border: 1px solid #39ff14;
   padding: 8px;
   text-align: left;
 }
 
 table th {
-  background-color: #111b2b;
-  color: #7fdbca;
+  background-color: #101010;
+  color: #39ff14;
 }
 
 table td:last-child {
@@ -75,11 +75,11 @@ table td:last-child {
 }
 
 button.delete-btn {
-  background-color: #ff5e56;
+  background-color: #f012be;
   color: #fff;
 }
 
 button.edit-btn {
-  background-color: #ff8f40;
-  color: #02050a;
+  background-color: #ff851b;
+  color: #080808;
 }
