@@ -1,92 +1,68 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  padding: 0;
 }
 
 .container {
+  max-width: 600px;
+  margin: 20px auto;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
 }
 
 h1 {
   text-align: center;
-  color: #333;
 }
 
 form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-label {
-  margin-top: 10px;
-}
-
-input, textarea {
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ddd;
+input[type="text"],
+input[type="number"],
+button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.button-container {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
+  flex: 1;
 }
 
 button {
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-button#addButton {
   background-color: #4CAF50;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
-button#cancelButton {
-  background-color: #f44336;
-  color: white;
+button:hover {
+  background-color: #45a049;
 }
 
-button#addButton:hover, button#cancelButton:hover {
-  opacity: 0.8;
-}
-
-#inventoryList {
+#inventory-list {
   margin-top: 20px;
 }
 
-.card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 10px;
+.product-item {
+  background-color: #f0f0f0;
   margin-bottom: 10px;
+  padding: 10px;
   border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.card h3 {
-  margin-top: 0;
-  color: #333;
+.product-item span {
+  flex: 1;
 }
 
-.card p {
-  margin: 5px 0;
-  color: #666;
+.product-item button {
+  margin-left: 10px;
 }
