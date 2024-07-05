@@ -1,81 +1,70 @@
-// Función para guardar el producto en Local Storage
-function saveProduct(name, description, quantity) {
-  let products = JSON.parse(localStorage.getItem('products')) || [];
-  let newItemId = products.length + 1; // Generar un nuevo ID automáticamente
-  let product = {
-    id: newItemId,
-    name: name,
-    description: description,
-    quantity: quantity
-  };
-  products.push(product);
-  localStorage.setItem('products', JSON.stringify(products));
+// Función para añadir un producto al inventario
+function addProduct(name, description, quantity) {
+  let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+  
+  // Verificar si el producto ya existe en el inventario
+  let existingProduct = inventory.find(product => product.name === name && product.description === description);
+  
+  if (existingProduct) {
+    // Actualizar la cantidad del producto existente
+    existingProduct.quantity = parseInt(existingProduct.quantity) + parseInt(quantity);
+  } else {
+    // Añadir un nuevo producto al inventario
+    inventory.push({ name, description, quantity });
+  }
+  
+  localStorage.setItem('inventory', JSON.stringify(inventory));
+  
+  displayInventory();
 }
 
-// Función para mostrar los productos en el inventario
+// Función para mostrar el inventario en la página
 function displayInventory() {
-  let inventoryList = document.getElementById('inventoryList');
+  let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+  let inventoryList = document.getElementById('inventory-list');
   inventoryList.innerHTML = '';
 
-  let products = JSON.parse(localStorage.getItem('products')) || [];
-
-  products.forEach(function(product) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `
-      <h3>${product.name}</h3>
-      <p><strong>ID:</strong> ${product.id}</p>
-      <p><strong>Descripción:</strong> ${product.description}</p>
-      <p><strong>Cantidad:</strong> ${product.quantity}</p>
-      <button onclick="editProduct(${product.id})">Editar</button>
-      <button onclick="deleteProduct(${product.id})">Eliminar</button>
+  inventory.forEach(product => {
+    const item = document.createElement('div');
+    item.classList.add('product-item');
+    item.innerHTML = `
+      <span>${product.name} - ${product.description} (${product.quantity})</span>
+      <button onclick="editProduct('${product.name}', '${product.description}')">Editar</button>
     `;
-    inventoryList.appendChild(card);
+    inventoryList.appendChild(item);
   });
 }
 
-// Función para añadir un producto al inventario
-function addProduct(event) {
-  event.preventDefault();
+// Función para editar la cantidad de un producto
+function editProduct(name, description) {
+  let newQuantity = prompt(`Ingrese la nueva cantidad para ${name} - ${description}`);
   
-  let name = document.getElementById('name').value;
-  let description = document.getElementById('description').value;
-  let quantity = document.getElementById('quantity').value;
-
-  saveProduct(name, description, quantity);
-  displayInventory();
-  clearForm();
+  if (newQuantity !== null) {
+    let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+    let productIndex = inventory.findIndex(product => product.name === name && product.description === description);
+    
+    if (productIndex !== -1) {
+      inventory[productIndex].quantity = parseInt(newQuantity);
+      localStorage.setItem('inventory', JSON.stringify(inventory));
+      displayInventory();
+    }
+  }
 }
 
-// Función para limpiar el formulario después de añadir un producto
-function clearForm() {
-  document.getElementById('name').value = '';
-  document.getElementById('description').value = '';
-  document.getElementById('quantity').value = '';
-}
+// Event listener para el formulario de añadir producto
+document.getElementById('product-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  let name = document.getElementById('name').value.trim();
+  let description = document.getElementById('description').value.trim();
+  let quantity = document.getElementById('quantity').value.trim();
 
-// Función para cancelar la acción de añadir un producto (limpia el formulario)
-function cancelAdd() {
-  clearForm();
-}
-
-// Función para editar un producto (a implementar según necesidad)
-function editProduct(id) {
-  // Aquí podrías implementar la lógica para editar un producto
-  // Por ejemplo, mostrando los datos del producto en el formulario y permitiendo modificarlos
-}
-
-// Función para eliminar un producto del inventario
-function deleteProduct(id) {
-  let products = JSON.parse(localStorage.getItem('products')) || [];
-  let updatedProducts = products.filter(product => product.id !== id);
-  localStorage.setItem('products', JSON.stringify(updatedProducts));
-  displayInventory();
-}
-
-// Event listeners
-document.getElementById('inventoryForm').addEventListener('submit', addProduct);
-document.getElementById('cancelButton').addEventListener('click', cancelAdd);
+  if (name && description && quantity) {
+    addProduct(name, description, quantity);
+    document.getElementById('product-form').reset();
+  } else {
+    alert('Por favor complete todos los campos.');
+  }
+});
 
 // Mostrar el inventario al cargar la página
 displayInventory();
