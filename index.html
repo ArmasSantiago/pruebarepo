@@ -9,13 +9,23 @@
 <body>
   <div class="container">
     <h1>Gestión de Inventario</h1>
-    <form id="product-form">
-      <input type="text" id="name" placeholder="Nombre del producto" required>
-      <input type="text" id="description" placeholder="Descripción del producto" required>
-      <input type="number" id="quantity" placeholder="Cantidad" required>
-      <button type="submit">Añadir Producto</button>
-    </form>
-    <div id="inventory-list"></div>
+
+    <!-- Sección de Agregar Producto -->
+    <section id="add-product">
+      <h2>Agregar Producto</h2>
+      <form id="product-form">
+        <input type="text" id="name" placeholder="Nombre del producto" required>
+        <input type="text" id="description" placeholder="Descripción del producto" required>
+        <input type="number" id="quantity" placeholder="Cantidad" required>
+        <button type="submit">Añadir Producto</button>
+      </form>
+    </section>
+
+    <!-- Sección de Inventario -->
+    <section id="inventory">
+      <h2>Inventario</h2>
+      <div id="inventory-list"></div>
+    </section>
   </div>
   
   <script src="script.js"></script>
